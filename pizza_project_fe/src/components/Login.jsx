@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { update } from '../redux/slices/loginSlice';
 
 const Login = () => {
   const [hidePassword, setHidePassword] = useState(false)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const dispatch = useDispatch()
+  const handleCloseMember =()=>{
+    dispatch(update())
+  }
   return (
     <div className='relative'>
       <div className='w-[960px] h-[487.7px] flex '>
@@ -13,7 +19,7 @@ const Login = () => {
         <div className='w-[50%] text-center bg-white shadow-lg rounded-r-md '>
           <p className='text-[#A80000] font-normal text-[25px] pt-[50px]'>🍕🍕 WELCOME!</p>
           <p className='mt-[2px] text-[rgb(0,0,0,0.87)] text-sm tracking-[0.01071em] font-medium uppercase w-[70%] translate-x-[25%]'>Chào mừng bạn đến với pizzeria! Đăng nhập trước khi thanh toán để tích điểm - Đổi Pizza nhé!</p>
-          <div className='h-auto mx-[57px] text-left'>
+          <form className='h-auto mx-[57px] text-left'>
             <label className='font-bold text-sm' > Email *</label>         
             <input className='peer w-full h-[40px] border-2 rounded-[4px] border-[rgba(70, 90, 126, 0.4)] px-[14px] py-[10.5px] focus:outline-none focus:border-[#07bc0c]
             invalid:border-[#f44336]  focus:invalid:border-[#f44336] focus:invalid:ring-[#f44336]
@@ -40,7 +46,7 @@ const Login = () => {
               <Link to='/forgot-password' className='text-[#0A8020] text-sm '>Quên mật khẩu?</Link>
             </div>
             <button className='bg-[#0A8020] mt-5 text-white w-[80%] h-[33px] mx-[10%] rounded-[4px] text-sm'>ĐĂNG NHẬP</button>
-          </div>
+          </form>
           <div className='text-sm m-[18px]'>
             Bạn chưa có tài khoản? 
             <span>
@@ -48,9 +54,9 @@ const Login = () => {
             </span>
           </div>
         </div>
-        <div className='absolute top-[-10px] right-[-15px] cursor-pointer'>
+        <button className='absolute top-[-10px] right-[-15px]' onClick={handleCloseMember}>
             <img className='w-[30px]' src='https://cdn.pizzahut.vn/images/Web_V3/Member/close.png' alt='close'></img>
-        </div>
+        </button>
       </div>    
     </div>
   )
