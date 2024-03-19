@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CgBell } from "react-icons/cg";
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { update } from '../redux/slices/loginSlice';
 
 const Index = () => {
     const navigate = useNavigate()
     const [isNotificationVisible, setNotificationVisible] = useState(false);
     const notificationRef = useRef(null);
-
+    const dispatch = useDispatch();
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (isNotificationVisible && !notificationRef.current?.contains(event.target)) {
@@ -24,6 +26,9 @@ const Index = () => {
     const handleClickCGBell = () => {
       setNotificationVisible(!isNotificationVisible);
     }
+    const handleClickMember =()=>{
+      dispatch(update())
+    }
   return (
     <div className='fixed flex top-0 w-full bg-white h-[64px] px-[18px] shadow-xl justify-between z-10'>
       <div className=' h-full  cursor-pointer flex items-center' onClick={()=>navigate("/")}>
@@ -36,10 +41,10 @@ const Index = () => {
                <p>Bạn chưa có thông báo nào!</p>
             </div>
         </div>
-        <div className='flex  items-center p-[20px] cursor-pointer hover:bg-slate-100'>
+        <button className='flex  items-center p-[20px]  hover:bg-slate-100' onClick={handleClickMember}>
           <img className='h-[24px] w-[24px] rounded-full' src='https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/cb1c3b/external-user-networking-tanah-basah-glyph-tanah-basah.png' alt=':Avatar' />
           <p className='font-bold  pl-[8px]'>Thành viên</p>
-        </div>
+        </button>
         <div className='h-full flex items-center border-l-2 p-[8px] cursor-pointer hover:bg-slate-100'>
           <img className='h-[24px] w-[24px]' src='https://cdn.pizzahut.vn/images/Web_V3/OrderTracker/track_your_order.svg' alt='Theo dõi đơn hàng' />
           <p className='font-bold pl-1 '>Theo Dõi Đơn Hàng</p>
