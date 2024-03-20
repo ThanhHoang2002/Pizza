@@ -4,11 +4,13 @@ import Slide from '../components/Slide'
 import MethodReceive from '../components/MethodReceive'
 import { useSelector } from 'react-redux'
 import Login from '../components/Login'
+import Alert from '../components/Alert'
 const Home = () => {
   const isHiddenLogin = useSelector((state) => state.login.hidden)
+  const isHiddenAlert = useSelector((state) => state.alert.hidden)
   return (
     <div>
-      <div className={`${isHiddenLogin?'':'pointer-events-none brightness-50 h-screen w-[1519px] overflow-hidden'} bg-white`}>
+      <div className={`${isHiddenLogin===true && isHiddenAlert===true?'':'pointer-events-none brightness-50 h-screen w-[1519px] overflow-hidden'} bg-white`}>
         <div className='h-[64px] bg-white'>
           <Header />
         </div>
@@ -112,6 +114,9 @@ const Home = () => {
       </div>
       <div className={`absolute top-[16%] left-[19%] z-50 ${isHiddenLogin?'hidden':''} `}>
         <Login/>
+      </div>
+      <div className={`absolute top-[40%] left-[35%] z-50 ${isHiddenAlert?'hidden':''}`}>
+        <Alert/>
       </div>
     </div>
   )
