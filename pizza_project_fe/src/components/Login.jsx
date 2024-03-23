@@ -29,7 +29,7 @@ const Login = () => {
             <input className='peer w-full h-[40px] border-2 rounded-[4px] border-[rgba(70, 90, 126, 0.4)] px-[14px] py-[10.5px] focus:outline-none focus:border-[#07bc0c]
             invalid:border-[#f44336]  focus:invalid:border-[#f44336] focus:invalid:ring-[#f44336]
             ' type='email' value={email} onChange={(e) => setEmail(e.target.value)}></input>
-              <p class="mt-2 ml-4 invisible peer-invalid:visible text-[#f44336] text-xs">
+              <p className="mt-2 ml-4 invisible peer-invalid:visible text-[#f44336] text-xs">
                 Email không hợp lệ
               </p>
             <label className='font-bold text-sm'> Mật Khẩu *</label>
@@ -53,7 +53,7 @@ const Login = () => {
             <button className='bg-[#0A8020] mt-5 text-white w-[80%] h-[33px] mx-[10%] rounded-[4px] text-sm'>ĐĂNG NHẬP</button>
           </form>
           <div className='text-sm m-[18px]'>
-            Bạn chưa có tài khoản? <bt/>
+            Bạn chưa có tài khoản? {' '}
             <button className='text-[rgb(10,128,32)]'onClick={handleChoseSignUp}>
               Đăng ký ngay
             </button>

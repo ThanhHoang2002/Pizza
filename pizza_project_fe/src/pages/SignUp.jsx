@@ -29,7 +29,7 @@ const SignUp = () => {
     <div>
       <div className={`${isHiddenLogin===true && isHiddenAlert===true ? '':'pointer-events-none brightness-50 '}h-screen relative bg-white`} >
           <div className='bg-white h-[64px] '>
-            <Header/>
+            <Header width="full"/>
           </div>
           <div className='w-[960px] translate-x-[30%] translate-y-14 shadow-xl'>
             <img src='https://cdn.pizzahut.vn/images/Web_V3/Member/3054x201.jpg' alt='chao mung'/>
