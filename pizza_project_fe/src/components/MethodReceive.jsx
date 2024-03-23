@@ -32,6 +32,8 @@ const MethodReceive = () => {
     const handleDeleteAddress = () => {
         setAddress('')
         setData([])
+        setChosenAddress('')
+        setChosenStore({})
     }
     const handleChosenStore = (item) => {
         if (item.name !== chosenStore?.name) {
