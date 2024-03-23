@@ -12,19 +12,19 @@ const Home = () => {
     <div>
       <div className={`${isHiddenLogin===true && isHiddenAlert===true?'':'pointer-events-none brightness-50 h-screen w-[1519px] overflow-hidden'} bg-white`}>
         <div className='h-[64px] bg-white'>
-          <Header />
+          <Header width="full"/>
         </div>
         <div className='conten h-auto'>
           <Slide />
-          <div className='h-auto w-full flex justify-center'>
-            <div className='relative translate-y-[-50px]'>
+          <div className='h-auto w-full flex justify-center' >
+            <div className='relative translate-y-[-50px] z-10'>
               <MethodReceive />
             </div>
           </div>
           <div className='grid grid-cols-2'>
             <div className='col-span-2 h-5 flex justify-center items-center relative'>
               <p className='px-[12px] uppercase font-bold text-[1.4rem] z-[1] absolute bg-white'>Khuyến mãi</p>
-              <p className='h-[3px] bg-[#e9ebee] w-full z-0 absolute'></p>
+              <p className='h-[3px] bg-[#e9ebee] w-full absolute'></p>
             </div>
             <div className='h-auto p-[10px] flex items-center justify-end'>
               <img className='w-[70%] h-[190px] cursor-pointer ' src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbanner%2Fbanner%202.jpg?alt=media&token=5b533285-c820-444e-b7b0-1b8abdc32c94' alt=':img' />

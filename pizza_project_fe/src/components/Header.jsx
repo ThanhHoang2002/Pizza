@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { update } from '../redux/slices/loginSlice';
 
-const Index = () => {
+const Index = (props) => {
     const navigate = useNavigate()
     const [isNotificationVisible, setNotificationVisible] = useState(false);
     const notificationRef = useRef(null);
@@ -30,7 +30,7 @@ const Index = () => {
       dispatch(update())
     }
   return (
-    <div className='fixed flex top-0 w-full bg-white h-[64px] px-[18px] shadow-xl justify-between z-10'>
+    <div className={`fixed flex top-0 w-${props.width} bg-white h-[64px] px-[18px] shadow-xl justify-between z-10`}>
       <div className=' h-full  cursor-pointer flex items-center' onClick={()=>navigate("/")}>
           <img className='h-[38px] pl-3' src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Flogo%2Flogo.png?alt=media&token=16501ae5-ad8f-40da-86d4-0ebe1a4e9a0e' alt=':Logo' />
       </div>

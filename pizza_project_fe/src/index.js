@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes, } from 'react-router-dom';
 import SignUp from './pages/SignUp';
 import store from './redux/store';
 import { Provider } from 'react-redux'; 
+import Order from './pages/Order';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ root.render(
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/sign-up' element={<SignUp/>}/>
+          <Route path='/order' element={<Order/>}/>
         </Routes>
       </BrowserRouter>
     </Provider>
