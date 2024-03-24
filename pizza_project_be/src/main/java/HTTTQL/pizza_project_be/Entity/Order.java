@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Order")
+@Table(name = "tbl_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Order {
     @Column(name = "payment", nullable = false)
     private String payment;
 
-    @Column(name = "dayOrder", nullable = false)
+    @Column(name = "dayorder", nullable = false)
     private Date dayOrder;
 
     @Column(name = "state", nullable = false)

@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "DetailFoodBill")
+@Table(name = "tbl_detaifloodbill")
 public class DetailFoodBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,9 @@ public class DetailFoodBill {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceAtBill", nullable = false)
+    @Column(name = "priceatbill", nullable = false)
     private int priceAtBill;
 
-    @OneToMany(mappedBy = "detailFoodBill", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "detailfoodbill", cascade = CascadeType.ALL)
     private List<Food> foods;
 }

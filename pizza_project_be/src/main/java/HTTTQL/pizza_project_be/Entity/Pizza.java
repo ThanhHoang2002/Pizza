@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Pizza")
+@Table(name = "tbl_pizza")
 public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +29,6 @@ public class Pizza {
     private String base;
 
     @ManyToOne()
-    @JoinColumn(name = "pizzaType_id", nullable = false)
+    @JoinColumn(name = "pizzatype_id", nullable = false)
     private PizzaType pizzaType;
 }

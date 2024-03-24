@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "PizzaType")
+@Table(name = "tbl_pizzatype")
 public class PizzaType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

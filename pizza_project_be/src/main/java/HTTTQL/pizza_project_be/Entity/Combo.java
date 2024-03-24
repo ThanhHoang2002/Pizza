@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Combo")
+@Table(name = "tbl_combo")
 public class Combo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +25,10 @@ public class Combo {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "dayS", nullable = false)
+    @Column(name = "days", nullable = false)
     private Date dayS;
 
-    @Column(name = "dayE", nullable = false)
+    @Column(name = "daye", nullable = false)
     private Date dayE;
 
     @OneToMany(mappedBy = "combo", cascade = CascadeType.ALL)

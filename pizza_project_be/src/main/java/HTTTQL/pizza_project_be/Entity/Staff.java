@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Staff")
+@Table(name = "tbl_staff")
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +35,8 @@ public class Staff {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @ManyToOne()
+    @JoinColumn(name = "brand", nullable = false)
+    private Brand brand;
 }

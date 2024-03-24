@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "DetailComboBill")
+@Table(name = "tbl_detailcombobill")
 public class DetailComboBill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,9 @@ public class DetailComboBill {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceAtBill", nullable = false)
+    @Column(name = "priceatbill", nullable = false)
     private int priceAtBill;
 
-    @OneToMany(mappedBy = "detailComboBill", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "detailcombobill", cascade = CascadeType.ALL)
     private List<Combo> combos;
 }
