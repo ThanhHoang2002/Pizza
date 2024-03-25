@@ -1,38 +1,42 @@
 package HTTTQL.pizza_project_be.Entity;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-@Table(name = "tbl_client")
+@NoArgsConstructor
+@Table(name = "client")
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "client_id")
+    private String clientId;
 
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "phone", nullable = false)
-    private String phone;
+    @Column(name = "dateOfBirth")
+    private Date dateOfBirth;
 
-    @Column(name = "birthday", nullable = false)
-    private Date birthday;
-
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender")
     private String gender;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "password")
+    private String password;
+
 }

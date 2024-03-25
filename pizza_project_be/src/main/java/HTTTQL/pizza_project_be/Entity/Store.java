@@ -5,17 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "tbl_brand")
-public class Brand{
+@Table(name = "store")
+public class Store {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "store_id")
+    private String storeId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -23,4 +25,7 @@ public class Brand{
     @Column(name = "address", nullable = false)
     private String address;
 
+    @OneToMany
+    @JoinColumn(name = "store_id")
+    private List<Order> orderList;
 }

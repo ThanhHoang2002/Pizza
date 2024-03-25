@@ -11,16 +11,20 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tbl_detailpizzacombo")
-public class DetailPizzaCombo {
+@Table(name = "food_in_order")
+public class FoodInOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "food_in_order_id")
+    private String foodInOrderId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @OneToMany(mappedBy = "detailpizzacombo", cascade = CascadeType.ALL)
-    private List<Pizza> pizzas;
+    @Column(name = "priceatbill", nullable = false)
+    private int priceAtBill;
+
+    @ManyToOne
+    @JoinColumn(name = "food_id", nullable = false)
+    private Food food;
+
 }
