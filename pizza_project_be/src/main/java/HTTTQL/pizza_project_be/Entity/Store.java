@@ -14,6 +14,7 @@ import java.util.List;
 @Data
 @Table(name = "store")
 public class Store {
+
     @Id
     @Column(name = "store_id")
     private String storeId;

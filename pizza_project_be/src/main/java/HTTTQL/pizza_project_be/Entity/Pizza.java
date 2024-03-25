@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "pizza")
+
 public class Pizza {
     @Id
     @Column(name = "pizza_id")

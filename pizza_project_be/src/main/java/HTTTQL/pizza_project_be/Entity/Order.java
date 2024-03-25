@@ -19,6 +19,7 @@ public class Order {
     private String paymentMethod;
 
     @Column(name = "day_order", nullable = false)
+
     private Date dayOrder;
 
     private int total;

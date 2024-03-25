@@ -13,13 +13,13 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "drink_in_combo")
 public class DrinkInCombo {
+
     @Id
     @Column(name = "drink_in_combo_id")
     private String drinkInComboId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
-
 
     @ManyToOne
     @JoinColumn(name = "drink_id", nullable = false)

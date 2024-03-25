@@ -23,4 +23,5 @@ public class PizzaInCombo {
     @ManyToOne
     @JoinColumn(name = "pizza_id", nullable = false)
     private Pizza pizza;
+
 }

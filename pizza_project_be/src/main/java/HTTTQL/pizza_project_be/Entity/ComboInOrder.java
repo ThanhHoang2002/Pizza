@@ -19,7 +19,7 @@ public class ComboInOrder {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceAtBill", nullable = false)
+    @Column(name = "priceatbill", nullable = false)
     private int priceAtBill;
 
     @ManyToOne

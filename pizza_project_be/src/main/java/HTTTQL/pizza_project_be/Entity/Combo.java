@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "combo")
+
 public class Combo {
     @Id
     @Column(name = "combo_id")
@@ -24,12 +25,12 @@ public class Combo {
     @Column(name = "price", nullable = false)
     private int price;
 
+
     @Column(name = "day_start", nullable = false)
     private Date dayStart;
 
     @Column(name = "day_end", nullable = false)
     private Date dayEnd;
-
     @OneToMany
     @JoinColumn(name = "combo_id")
     private List<DrinkInCombo> drinkInCombos;

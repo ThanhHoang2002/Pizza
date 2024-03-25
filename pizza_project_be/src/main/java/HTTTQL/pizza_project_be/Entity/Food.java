@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "food")
+
 public class Food {
     @Id
     @Column(name = "food_id")
@@ -23,4 +24,5 @@ public class Food {
 
     @Column(name = "foodCategory", nullable = false)
     private String foodCategory;
+
 }

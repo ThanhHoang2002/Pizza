@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "pizza_in_order")
 public class PizzaInOrder {
+
     @Id
     @Column(name = "pizza_in_order_id")
     private String pizzaInOrderId;
@@ -19,7 +20,7 @@ public class PizzaInOrder {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceAtBill", nullable = false)
+    @Column(name = "priceatbill", nullable = false)
     private int priceAtBill;
 
     @ManyToOne(cascade = CascadeType.ALL)

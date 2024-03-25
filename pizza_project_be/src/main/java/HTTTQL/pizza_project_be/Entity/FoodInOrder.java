@@ -20,10 +20,11 @@ public class FoodInOrder {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceAtBill", nullable = false)
+    @Column(name = "priceatbill", nullable = false)
     private int priceAtBill;
 
     @ManyToOne
     @JoinColumn(name = "food_id", nullable = false)
     private Food food;
+
 }

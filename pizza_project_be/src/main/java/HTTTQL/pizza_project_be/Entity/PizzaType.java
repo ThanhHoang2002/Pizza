@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "pizza_type")
+
 public class PizzaType {
     @Id
     @Column(name = "pizza_type_id")

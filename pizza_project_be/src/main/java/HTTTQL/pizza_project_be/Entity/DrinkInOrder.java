@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "drink_in_order")
 public class DrinkInOrder {
+
     @Id
     @Column(name = "drink_in_order_id")
     private String drinkInOrderId;
@@ -18,10 +19,11 @@ public class DrinkInOrder {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceAtBill", nullable = false)
+    @Column(name = "priceatbill", nullable = false)
     private int priceAtBill;
 
     @ManyToOne
     @JoinColumn(name = "drink_id", nullable = false)
     private Drink drink;
+
 }
