@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Food")
+@Table(name = "food")
 public class Food {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "food_id")
+    private String foodId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -22,7 +21,6 @@ public class Food {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @ManyToOne()
-    @JoinColumn(name = "foodCategory_id", nullable = false)
-    private FoodCategory foodCategory;
+    @Column(name = "foodCategory", nullable = false)
+    private String foodCategory;
 }

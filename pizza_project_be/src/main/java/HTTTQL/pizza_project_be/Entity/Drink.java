@@ -9,12 +9,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Drink")
+@Table(name = "drink")
 public class Drink {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "drink_id")
+    private String drinkId;
 
     @Column(name = "name" , nullable = false)
     private String name;

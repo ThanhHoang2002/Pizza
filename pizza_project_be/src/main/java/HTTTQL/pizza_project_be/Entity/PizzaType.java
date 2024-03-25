@@ -5,16 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "PizzaType")
+@Table(name = "pizza_type")
 public class PizzaType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "pizza_type_id")
+    private String pizzaTypeId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -24,4 +25,8 @@ public class PizzaType {
 
     @Column(name = "category", nullable = false)
     private String category;
+
+    @OneToMany
+    @JoinColumn(name = "pizza_id")
+    private List<Pizza> pizzas;
 }

@@ -6,18 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "DetailPizzaBill")
-public class DetailPizzaBill {
+@Table(name = "pizza_in_order")
+public class PizzaInOrder {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "pizza_in_order_id")
+    private String pizzaInOrderId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
@@ -25,6 +22,7 @@ public class DetailPizzaBill {
     @Column(name = "priceAtBill", nullable = false)
     private int priceAtBill;
 
-    @OneToMany(mappedBy = "detailPizzaBill", cascade = CascadeType.ALL)
-    private List<Pizza> pizzas;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pizza_id", nullable = false)
+    private Pizza pizza;
 }

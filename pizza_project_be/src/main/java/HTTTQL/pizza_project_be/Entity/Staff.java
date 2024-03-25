@@ -11,12 +11,11 @@ import java.util.Date;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Staff")
+@Table(name = "staff")
 public class Staff {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "staff_id")
+    private String staffId;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -35,4 +34,8 @@ public class Staff {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Store store;
 }

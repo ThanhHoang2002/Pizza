@@ -11,16 +11,17 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "DetailFoodCombo")
-public class DetailFoodCombo {
+@Table(name = "drink_in_combo")
+public class DrinkInCombo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "drink_in_combo_id")
+    private String drinkInComboId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @OneToMany(mappedBy = "detailFoodCombo", cascade = CascadeType.ALL)
-    private List<Food> foods;
+
+    @ManyToOne
+    @JoinColumn(name = "drink_id", nullable = false)
+    private Drink drink;
 }

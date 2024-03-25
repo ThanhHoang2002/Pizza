@@ -12,12 +12,11 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Combo")
+@Table(name = "combo")
 public class Combo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private String id;
+    @Column(name = "combo_id")
+    private String comboId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -25,18 +24,21 @@ public class Combo {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "dayS", nullable = false)
-    private Date dayS;
+    @Column(name = "day_start", nullable = false)
+    private Date dayStart;
 
-    @Column(name = "dayE", nullable = false)
-    private Date dayE;
+    @Column(name = "day_end", nullable = false)
+    private Date dayEnd;
 
-    @OneToMany(mappedBy = "combo", cascade = CascadeType.ALL)
-    private List<DetailDrinkCombo> detailDrinkCombos;
+    @OneToMany
+    @JoinColumn(name = "combo_id")
+    private List<DrinkInCombo> drinkInCombos;
 
-    @OneToMany(mappedBy = "combo", cascade = CascadeType.ALL)
-    private List<DetailFoodCombo> detailFoodCombos;
+    @OneToMany
+    @JoinColumn(name = "combo_id")
+    private List<FoodInCombo> foodInCombos;
 
-    @OneToMany(mappedBy = "combo", cascade = CascadeType.ALL)
-    private List<DetailPizzaCombo> detailPizzaCombos;
+    @OneToMany
+    @JoinColumn(name = "combo_id")
+    private List<PizzaInCombo> pizzaInCombos;
 }

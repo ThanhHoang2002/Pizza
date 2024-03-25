@@ -32,8 +32,8 @@ const MethodReceive = () => {
     const handleDeleteAddress = () => {
         setAddress('')
         setData([])
-        setChosenAddress('')
         setChosenStore({})
+        setChosenAddress('')
     }
     const handleChosenStore = (item) => {
         if (item.name !== chosenStore?.name) {
@@ -49,7 +49,7 @@ const MethodReceive = () => {
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        };
+        }; 
     
         // Khi 'address' thay đổi, hủy timeout hiện tại (nếu có)
         if (typingTimeoutRef.current) {
