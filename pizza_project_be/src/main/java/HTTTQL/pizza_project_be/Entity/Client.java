@@ -19,12 +19,12 @@ import java.util.Date;
 public class Client {
     @Id
     @Column(name = "client_id")
-    private String clientId;
+    private long clientId;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "dateOfBirth")
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
     @Column(name = "gender")

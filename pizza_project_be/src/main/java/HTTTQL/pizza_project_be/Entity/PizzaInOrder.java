@@ -20,8 +20,11 @@ public class PizzaInOrder {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "priceatbill", nullable = false)
+    @Column(name = "price_at_bill", nullable = false)
     private int priceAtBill;
+
+    @Column(name = "base", nullable = false)
+    private String base;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pizza_id", nullable = false)

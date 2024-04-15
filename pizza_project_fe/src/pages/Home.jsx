@@ -5,14 +5,20 @@ import MethodReceive from '../components/MethodReceive'
 import { useSelector } from 'react-redux'
 import Login from '../components/Login'
 import Alert from '../components/Alert'
+import { useNavigate } from 'react-router-dom'
 const Home = () => {
   const isHiddenLogin = useSelector((state) => state.login.hidden)
   const isHiddenAlert = useSelector((state) => state.alert.hidden)
+  const navigate = useNavigate()
+  const handleClickMenu = () => {
+    navigate('/order')
+    window.scrollTo(0, 0); 
+  }
   return (
     <div>
       <div className={`${isHiddenLogin===true && isHiddenAlert===true?'':'pointer-events-none brightness-50 h-screen w-[1519px] overflow-hidden'} bg-white`}>
         <div className='h-[64px] bg-white'>
-          <Header width="full"/>
+          <Header width="full" showFollowOrder="true"/>
         </div>
         <div className='conten h-auto'>
           <Slide />
@@ -26,20 +32,21 @@ const Home = () => {
               <p className='px-[12px] uppercase font-bold text-[1.4rem] z-[1] absolute bg-white'>Khuyến mãi</p>
               <p className='h-[3px] bg-[#e9ebee] w-full absolute'></p>
             </div>
-            <div className='h-auto p-[10px] flex items-center justify-end'>
+            <div className='h-auto p-[10px] flex items-center justify-end'onClick={handleClickMenu}>
               <img className='w-[70%] h-[190px] cursor-pointer ' src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbanner%2Fbanner%202.jpg?alt=media&token=5b533285-c820-444e-b7b0-1b8abdc32c94' alt=':img' />
             </div>
-            <div className='h-auto p-[10px] flex items-center justify-start'>
+            <div className='h-auto p-[10px] flex items-center justify-start'onClick={handleClickMenu}>
               <img className='w-[70%] h-[190px] cursor-pointer' src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbanner%2Fbanner%204.jpg?alt=media&token=0d70d97f-5eee-4ff1-8e60-cd9b68b11d56' alt=':img' />
             </div>
             <div className='col-span-2 h-auto flex justify-center items-center'>
-              <button className='w-[69.5%] bg-[#0A8020] text-white rounded-[4px] py-[12px] text-sm'>
+              <button className='w-[69.5%] bg-[#0A8020] text-white rounded-[4px] py-[12px] text-sm'
+              onClick={handleClickMenu}>
                 XEM MENU
               </button>
             </div>
           </div>
         </div>
-        <div className='footer h-auto bg-[#000000e6] mt-[20px] flex justify-center'>
+        <div className='footer h-auto bg-[#000000e6] mt-[20px] flex justify-center pointer-events-none'>
           <div className=' w-[70%]'>
             <div className='grid grid-cols-5'>
               <div className="MuiGrid-root jss1432 MuiGrid-item MuiGrid-grid-xs-6 MuiGrid-grid-sm-3 MuiGrid-grid-md-2">

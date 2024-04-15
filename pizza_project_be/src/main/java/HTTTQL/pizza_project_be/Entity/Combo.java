@@ -25,15 +25,20 @@ public class Combo {
     @Column(name = "price", nullable = false)
     private int price;
 
-
     @Column(name = "day_start", nullable = false)
     private Date dayStart;
 
     @Column(name = "day_end", nullable = false)
     private Date dayEnd;
-    @OneToMany
-    @JoinColumn(name = "combo_id")
-    private List<DrinkInCombo> drinkInCombos;
+
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @Column(name = "category", nullable = false)
+    private String category;
+
+    @Column(name = "des", nullable = false)
+    private String des;
 
     @OneToMany
     @JoinColumn(name = "combo_id")
