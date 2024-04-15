@@ -20,6 +20,9 @@ public class PizzaInCombo {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
+    @Column(name = "base", nullable = false)
+    private String base;
+
     @ManyToOne
     @JoinColumn(name = "pizza_id", nullable = false)
     private Pizza pizza;

@@ -1,5 +1,6 @@
 package HTTTQL.pizza_project_be.Entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,13 +22,16 @@ public class PizzaType {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "ingredient", nullable = false)
-    private String ingredient;
+    @Column(name = "des", nullable = false)
+    private String des;
 
     @Column(name = "category", nullable = false)
     private String category;
 
-    @OneToMany
-    @JoinColumn(name = "pizza_id")
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @OneToMany(mappedBy = "pizzaType",cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Pizza> pizzas;
 }

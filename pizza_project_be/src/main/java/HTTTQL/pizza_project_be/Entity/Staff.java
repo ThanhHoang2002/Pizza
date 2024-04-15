@@ -1,42 +1,22 @@
 package HTTTQL.pizza_project_be.Entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import lombok.*;
 
-import java.util.Date;
-
-@Data
-@Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "staff")
-
-public class Staff {
-    @Id
-    @Column(name = "staff_id")
-    private String staffId;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "phone", nullable = false)
-    private String phone;
-
-    @Column(name = "birthday", nullable = false)
-    private Date birthday;
-
-    @Column(name = "gender", nullable = false)
-    private String gender;
-
-    @Column(name = "email", nullable = false)
-    private String email;
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@Entity
+@PrimaryKeyJoinColumn(name = "user_id")
+public class Staff extends User{
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
+
 }

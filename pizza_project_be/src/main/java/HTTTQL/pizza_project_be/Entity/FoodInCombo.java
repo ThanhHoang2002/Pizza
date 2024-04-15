@@ -21,7 +21,7 @@ public class FoodInCombo {
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "fodd_id", nullable = false)
+    @JoinColumn(name = "food_id", nullable = false)
     private Food food;
 
 }

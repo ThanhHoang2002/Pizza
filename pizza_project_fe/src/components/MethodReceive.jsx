@@ -1,31 +1,48 @@
 import axios from 'axios'
-import React, { useRef, useState } from 'react'
-const MethodReceive = () => {
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { changeState } from '../redux/slices/methodReceiveSlice'
+import API_ROUTES from "../ApiUrl/index"
+const MethodReceive = (props) => {
     const [methodReceive, setMethodReceive] = useState(true)
-    const [address, setAddress] = useState('')
+    const [address, setAddress] = useState(JSON.parse(localStorage.getItem('address'))?.description || '')
     const [chosenStore, setChosenStore] = useState({})
-    const [chosenAddress, setChosenAddress] = useState('')
+    const [chosenAddress, setChosenAddress] = useState(JSON.parse(localStorage.getItem('address')) || '')
     const APiKey = 'TPtlQJJsrOvbIegiMhkf9ChSvNUXpQFjPWbE3BZM'
     const [data, setData] = useState([]);
     const typingTimeoutRef = useRef();
-    console.log(data)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const showClose = props.showClose;
+    
     //////////////////////////////////////////////////////////
-   const store = [
-    {
-        name: "Pizza Amazing Số 1",
-        address: "Số 1, Đường 3/2, Phường 11, Quận 10, TP.HCM"
-    },
-    {
-        name: "Pizza Amazing Số 2",
-        address: "Số 2, Đường 3/2, Phường 11, Quận 10, TP.HCM"
-    }
-  ]
+    const [store, setStore] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(API_ROUTES.getStoreData);
+          const data = await response.json();
+          setStore(data); 
+        } catch (error) {
+          console.error('Lỗi khi fetch dữ liệu từ API:', error);
+        }
+      };
+      fetchData(); // Gọi hàm fetchData khi component được render
+    }, [])
       /////////////////////////////////////////////////////////
     const changeMethod = (method) => {
         setMethodReceive(method)
         if(method === false) {
             setAddress('')
+            setChosenStore({})
+            setData([])
+            setChosenAddress('')
+            localStorage.removeItem('address');
+            localStorage.removeItem('store');
         }else{
+            localStorage.removeItem('store');
             setChosenStore({})
         }
     }
@@ -34,6 +51,8 @@ const MethodReceive = () => {
         setData([])
         setChosenStore({})
         setChosenAddress('')
+        localStorage.removeItem('address');
+        localStorage.removeItem('store');
     }
     const handleChosenStore = (item) => {
         if (item.name !== chosenStore?.name) {
@@ -65,6 +84,77 @@ const MethodReceive = () => {
         setAddress(item.description)
         setChosenAddress(item)
         setData([])
+    }
+    const getLocationDetails = async (placeId) => {
+        try {
+            const response = await axios.get(`https://rsapi.goong.io/Place/Detail?place_id=${placeId}&api_key=${APiKey}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching location details:', error);
+            throw error;
+        }
+    };
+    const fetchAndProcessLocation = async () => {
+        try {
+            const placeId = chosenAddress.place_id;
+            const locationData = await getLocationDetails(placeId);
+    
+            // Xử lý kết quả từ getLocationDetails
+            const lat = String(locationData.result.geometry.location.lat);
+            const lng = String(locationData.result.geometry.location.lng);
+            const formattedLocation = lat + ',' + lng;
+    
+            return formattedLocation; // Trả về chuỗi định dạng vị trí
+        } catch (error) {
+            console.error('Error fetching and processing location:', error);
+            throw error; // Xử lý lỗi nếu cần thiết
+        }
+    };
+    const fetchAndProcessDistance = async (location,store) => {
+        try {
+            const response = await axios.get(`https://rsapi.goong.io/Direction?origin=${location}&destination=${store}&vehicle=bike&api_key=${APiKey}`);
+            const distance = response.data.routes[0].legs[0].distance.value
+            return distance;
+        } catch (error) {
+            console.error('Error fetching and processing distance:', error);
+            throw error;
+        }
+    };
+    const handleSaveAddress = async () => {
+        if (methodReceive === true) {
+            localStorage.setItem('address', JSON.stringify(chosenAddress));
+            const locationResult = await fetchAndProcessLocation();
+            const minDistanceStore = store.reduce(async (minStorePromise, currentStorePromise) => {
+                const minStore = await minStorePromise;
+                const currentStore = await currentStorePromise;
+                const nowDistance = await fetchAndProcessDistance(locationResult, minStore.local)
+                                    .catch((error) => {
+                                        console.log('Error fetching and processing distance:', error);
+                                    });
+                const nextDistance = await fetchAndProcessDistance(locationResult, currentStore.local)
+                                    .catch((error) => {
+                                        console.log('Error fetching and processing distance:', error);
+                                    });;
+                if (nowDistance > nextDistance) {
+                    return currentStore;
+                } else {
+                    return minStore;
+                }
+            }, Promise.resolve(store[0]));
+            localStorage.setItem('store', JSON.stringify(await minDistanceStore));
+            localStorage.setItem('receiveMethod', 'Delivery')
+            navigate('/order')
+        } else {
+            localStorage.removeItem('address');
+            localStorage.setItem('store', JSON.stringify(chosenStore));
+            localStorage.setItem('receiveMethod', 'Pickup')
+            navigate('/order')
+        }
+        dispatch(changeState({ hidden: true }));
+        window.scrollTo(0, 0); // Cuộn ngay lập tức lên đầu của trang
+    };
+    const handClose = () => {
+        dispatch(changeState({ hidden: true }));
     }
   return (
     <div className='h-auto grid grid-cols-2 gap-x-1 w-[450px] z-30'>
@@ -102,10 +192,10 @@ const MethodReceive = () => {
                     </div>
                 </div>
             :
-                <div className=''> 
+                <div className='max-h-[250px] overflow-y-auto'> 
                     {store.map((item, index) => {
                         return (
-                            <div key={index} className={`${chosenStore.name === item.name ? 'bg-gray-200' : 'bg-white'} w-full h-[87px] py-[4px] flex justify-start border-b-2 cursor-pointer transition-colors duration-200 ease-in-out`} onClick={()=> handleChosenStore(item)}>
+                            <div key={index} className={`${chosenStore.name === item.name ? 'bg-gray-200' : 'bg-white'} w-full h-[87px] py-[4px] flex justify-start border-b-2 cursor-pointer transition-colors duration-200 ease-in-out `} onClick={()=> handleChosenStore(item)}>
                                 <div className='flex justify-center items-center'>
                                     <img src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Ficon%2Ficons8-location-24.png?alt=media&token=28735727-a79c-43f3-9c10-cc85d6bb3152' alt=':icon'/>
                                 </div>                       
@@ -126,11 +216,16 @@ const MethodReceive = () => {
                 </div>
             }
             <div>          
-                <button className={`${ Object.keys(chosenStore).length === 0 && chosenStore.constructor === Object && chosenAddress==='' ? 'hidden':''} uppercase w-full bg-[#0A8020] rounded-md text-white font-medium mt-[10px] py-[6px] px-[16px]`}>
+                <button className={`${ Object.keys(chosenStore).length === 0 && chosenStore.constructor === Object && chosenAddress==='' ? 'hidden':''} uppercase w-full bg-[#0A8020] rounded-md text-white font-medium mt-[10px] py-[6px] px-[16px]`}
+                onClick={handleSaveAddress}>
                     bắt đầu đặt hàng
                 </button>
             </div>  
         </div>
+        <button className={`${showClose?"absolute top-[-10px] right-[-15px]":"hidden"}`}
+                onClick={handClose}>
+            <img className='w-[30px]' src='https://cdn.pizzahut.vn/images/Web_V3/Member/close.png' alt='close'></img>
+        </button>
     </div>
   )
 }

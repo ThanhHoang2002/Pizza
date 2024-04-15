@@ -1,0 +1,16 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/pizza_project_data
+    username: root
+    password: 11102002
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  security:
+    user:
+      name: admin
+      password: admin
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true

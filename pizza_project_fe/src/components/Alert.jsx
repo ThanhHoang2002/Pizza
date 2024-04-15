@@ -10,7 +10,7 @@ const Alert = () => {
     }
   return (
     <div className='w-[444px] bg-white rounded-[4px] relative shadow-xl'>
-        <div className='px-[24px] pt-[20px] pb-[8px]'>
+        <div className='px-[24px] pt-[20px] pb-[8px] text-center'>
             {text}
         </div>
         <div className='p-2'>

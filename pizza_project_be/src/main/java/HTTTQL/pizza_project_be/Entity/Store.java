@@ -25,7 +25,7 @@ public class Store {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToMany
-    @JoinColumn(name = "store_id")
-    private List<Order> orderList;
+    @Column(name = "local", nullable = false)
+    private String local;
+
 }

@@ -22,7 +22,13 @@ public class Food {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "foodCategory", nullable = false)
+    @Column(name = "image", nullable = false)
+    private String image;
+
+    @Column(name = "des")
+    private String des;
+
+    @Column(name = "food_category", nullable = false)
     private String foodCategory;
 
 }

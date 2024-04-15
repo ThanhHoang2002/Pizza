@@ -17,21 +17,27 @@ const SignUp = () => {
   const isHiddenLogin = useSelector((state) => state.login.hidden)
   const isHiddenAlert = useSelector((state) => state.alert.hidden)
   const dispatch = useDispatch()
+  const isValidVietnamesePhoneNumber=(phone) => {
+    const regex = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/g;
+    return regex.test(phone);
+  }
   const handleSubmit =(e)=>{
     e.preventDefault()
     if(password!==rePassword){
       dispatch(update({hidden: false ,text: 'Mật khẩu và nhập lại mật khẩu chưa trùng khớp'}))
-    }else{
-      
+    }else if(password.length<6){
+      dispatch(update({hidden: false ,text: 'Mật khẩu phải lớn hơn 6 kí tự'}))
+    }else if(isValidVietnamesePhoneNumber(phone)===false){
+      dispatch(update({hidden: false ,text: 'Số điện thoại không hợp lệ'}))
     }
-  }
+}
   return (
     <div>
-      <div className={`${isHiddenLogin===true && isHiddenAlert===true ? '':'pointer-events-none brightness-50 '}h-screen relative bg-white`} >
+      <div className={`${isHiddenLogin===true && isHiddenAlert===true ? '':'pointer-events-none brightness-50 '}h-screen relative bg-[url("https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbackground%2Fbg.jpg?alt=media&token=486729de-f719-4d06-b818-adef3135a938")]`} >
           <div className='bg-white h-[64px] '>
-            <Header width="full"/>
+            <Header width="full" backButton="true" showFollowOrder="true"/>
           </div>
-          <div className='w-[960px] translate-x-[30%] translate-y-14 shadow-xl'>
+          <div className='w-[960px] translate-x-[30%] translate-y-14 shadow-xl '>
             <img src='https://cdn.pizzahut.vn/images/Web_V3/Member/3054x201.jpg' alt='chao mung'/>
             <div className='px-[45px] pb-[20px] bg-white'>
               <div className='text-center pt-[10px] pb-[4px]'>
@@ -102,11 +108,15 @@ const SignUp = () => {
           </div>
         </div>     
       </div>
-      <div className={`absolute top-[16%] left-[19%] z-50 ${isHiddenLogin?'hidden':''} `}>
-        <Login/>
+      <div className={`absolute top-[16%] left-[19%] z-50  `}>
+        {
+          isHiddenLogin===false ? <Login/> : ''
+        }
       </div>
-      <div className={`absolute top-[40%] left-[35%] z-50 ${isHiddenAlert?'hidden':''}`}>
-        <Alert/>
+      <div className={`absolute top-[40%] left-[35%] z-50 `}>
+        {
+          isHiddenAlert===false ? <Alert/> : ''
+        }
       </div>
     </div>
   )

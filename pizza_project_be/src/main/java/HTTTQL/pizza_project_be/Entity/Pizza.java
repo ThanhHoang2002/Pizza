@@ -1,5 +1,6 @@
 package HTTTQL.pizza_project_be.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,19 +17,14 @@ public class Pizza {
     @Column(name = "pizza_id")
     private String pizzaId;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @Column(name = "size", nullable = false)
     private String size;
 
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "base", nullable = false)
-    private String base;
-
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "pizza_type_id")
+    @JsonBackReference
     private PizzaType pizzaType;
 }
