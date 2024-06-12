@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import { useDispatch, useSelector } from 'react-redux'
-import Login from '../components/Login'
-import Alert from '../components/Alert'
-import { update } from '../redux/slices/alertSlice'
+import Login from '../../components/Login'
+import Alert from '../../components/Alert'
+import { update } from '../../redux/slices/alertSlice'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 const SignUp = () => {
   const [name, setName] = useState('')
   const [birthday, setBirthday] = useState()
@@ -21,7 +23,8 @@ const SignUp = () => {
     const regex = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/g;
     return regex.test(phone);
   }
-  const handleSubmit =(e)=>{
+  const navigate = useNavigate()
+  const handleSubmit = async(e)=>{
     e.preventDefault()
     if(password!==rePassword){
       dispatch(update({hidden: false ,text: 'Mật khẩu và nhập lại mật khẩu chưa trùng khớp'}))
@@ -29,6 +32,25 @@ const SignUp = () => {
       dispatch(update({hidden: false ,text: 'Mật khẩu phải lớn hơn 6 kí tự'}))
     }else if(isValidVietnamesePhoneNumber(phone)===false){
       dispatch(update({hidden: false ,text: 'Số điện thoại không hợp lệ'}))
+    }
+    const client ={
+      name: name,
+      dateOfBirth: birthday,
+      gender: gender,
+      phone: phone,
+      email: email,
+      password: password,
+    }
+    try {
+      const response = await axios.post('http://localhost:8080/api/v1/client/signup',client );
+      if(response.data.result==="Sign up successfully"){
+        dispatch(update({hidden: false ,text: 'Tạo tài khoản thành công'}))
+        navigate('/')
+      }else{
+        dispatch(update({hidden: false ,text: 'Email đã tồn tại'}))
+      }
+    } catch (error) {
+      console.error('Lỗi khi tạo tài khoản:', error);
     }
 }
   return (

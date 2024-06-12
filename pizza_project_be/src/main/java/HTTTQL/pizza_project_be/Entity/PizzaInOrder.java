@@ -15,7 +15,8 @@ public class PizzaInOrder {
 
     @Id
     @Column(name = "pizza_in_order_id")
-    private String pizzaInOrderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int pizzaInOrderId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
@@ -26,7 +27,7 @@ public class PizzaInOrder {
     @Column(name = "base", nullable = false)
     private String base;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "pizza_id", nullable = false)
     private Pizza pizza;
 }

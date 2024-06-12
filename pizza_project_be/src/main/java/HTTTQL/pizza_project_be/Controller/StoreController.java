@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/store")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("api/v1/store")
 @AllArgsConstructor
 public class StoreController {
     private final StoreService storeService;
-    @GetMapping
+    @GetMapping("/all")
     ApiResponse<List<Store>> getAllStore(){
-
         return ApiResponse.<List<Store>>builder()
                 .message("Get all store successfully")
                 .result(storeService.getAllStore())

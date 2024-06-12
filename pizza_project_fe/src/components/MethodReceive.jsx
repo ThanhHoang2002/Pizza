@@ -5,16 +5,18 @@ import { useNavigate } from 'react-router-dom'
 import { changeState } from '../redux/slices/methodReceiveSlice'
 import API_ROUTES from "../ApiUrl/index"
 const MethodReceive = (props) => {
-    const [methodReceive, setMethodReceive] = useState(true)
     const [address, setAddress] = useState(JSON.parse(localStorage.getItem('address'))?.description || '')
-    const [chosenStore, setChosenStore] = useState({})
+    const storedStore = localStorage.getItem('store');
+    console.log(storedStore)
+    const initialStore = (storedStore !== null && storedStore !== "undefined") ? JSON.parse(storedStore) : {};
+    const [chosenStore, setChosenStore] = useState(initialStore);
     const [chosenAddress, setChosenAddress] = useState(JSON.parse(localStorage.getItem('address')) || '')
     const APiKey = 'TPtlQJJsrOvbIegiMhkf9ChSvNUXpQFjPWbE3BZM'
     const [data, setData] = useState([]);
     const typingTimeoutRef = useRef();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const showClose = props.showClose;
+    const {showClose,methodReceive,setMethodReceive} = props
     
     //////////////////////////////////////////////////////////
     const [store, setStore] = useState([]);
@@ -24,7 +26,7 @@ const MethodReceive = (props) => {
         try {
           const response = await fetch(API_ROUTES.getStoreData);
           const data = await response.json();
-          setStore(data); 
+          setStore(data.result); 
         } catch (error) {
           console.error('Lỗi khi fetch dữ liệu từ API:', error);
         }

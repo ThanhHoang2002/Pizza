@@ -16,7 +16,7 @@ const MyBox = () => {
     fetchData(); // Gọi hàm fetchData khi component được render
   }, [])
   return (
-    <div className='h-auto min-h-[950px] w-full grid grid-cols-2'>
+    <div className='h-auto w-full grid grid-cols-2'>
         {
           combo.map((item, index)=>
             <Combo key={index} item={item} index={index}/>

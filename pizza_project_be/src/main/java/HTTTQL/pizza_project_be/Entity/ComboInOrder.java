@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 public class ComboInOrder {
     @Id
     @Column(name = "combo_in_order_id")
-    private String comboInOrderId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long comboInOrderId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;

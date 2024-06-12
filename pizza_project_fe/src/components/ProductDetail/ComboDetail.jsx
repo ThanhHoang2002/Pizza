@@ -13,11 +13,11 @@ const ComboDetail = () => {
   const handClose = () =>{
     dispatch(show({hidden: true, combo: {}}))
   }
-  const handleAddCombo = (item) =>{
+  const handleAddCombo = () =>{
     if(localStorage.getItem('store') === null){
       dispatch(changeState({hidden: false}))
     }else{
-        const existingComboIndex= order.comboInOrders.findIndex(ComboInOrder =>  ComboInOrder.combo.id === item.id)
+        const existingComboIndex= order.comboInOrders.findIndex(ComboInOrder =>  ComboInOrder.combo.comboId === combo.comboId)
         const updatedComboInOrder = [...order.comboInOrders];
         if(existingComboIndex !== -1){
             updatedComboInOrder[existingComboIndex] = {
@@ -27,12 +27,12 @@ const ComboDetail = () => {
         } else {
             const comboInOrders = {
                 quantity: 1,
-                priceAtBill: item.price,
-                combo: item
+                priceAtBill: combo.price,
+                combo: combo
             }
             updatedComboInOrder.push(comboInOrders);
         }
-        dispatch(updateOrder({ ...order,total: order.total+item.price , comboInOrders: updatedComboInOrder }));
+        dispatch(updateOrder({ ...order,total: order.total+combo.price , comboInOrders: updatedComboInOrder }));
         dispatch(show({hidden: true, combo: {}}))
         toast.success('Thêm vào giỏ hàng thành công')
     }
@@ -57,7 +57,7 @@ const ComboDetail = () => {
               </div>
               <div className='flex justify-between w-[50%]'>
                 <div className='text-[#231f20] px-[10px]'>Phí Giao Hàng:</div>
-                <div>{formatCurrency(35000)}</div>
+                <div>{formatCurrency(22000)}</div>
               </div>
             </div>
           </div>

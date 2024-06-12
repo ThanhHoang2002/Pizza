@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PizzaInComboInResponse {
-    private String pizzaInComboId;
+    private long pizzaInComboId;
     private int quantity;
     private String base;
     private PizzaResponse pizza;

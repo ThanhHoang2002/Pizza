@@ -1,73 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Product from '../Product/Food'
+import  API_ROUTES from '../../ApiUrl/index'
 const MenuDrink = () => {
-    const drinks = [
-       {
-        id: '1',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '2',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '3',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '4',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '5',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '6',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '7',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '8',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-       {
-        id: '9',
-        name: 'Pepsi Lon 320ml',
-        des: 'Pepsi Lon 320ml',
-        price: 20000,
-        image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Pepsi_Can_400x275.jpg'
-       },
-    ]
+    const[drinks, setDrinks] = useState([])
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(API_ROUTES.getDrink);
+          const data = await response.json();
+          setDrinks(data.result); 
+        } catch (error) {
+          console.error('Lỗi khi fetch dữ liệu từ API:', error);
+        }
+      };
+      fetchData(); // Gọi hàm fetchData khi component được render
+    }, [])
   return (
-    <div className='h-auto min-h-[950px] w-full grid grid-cols-4'>
+    <div className='h-auto  w-full grid grid-cols-4'>
         {
           drinks.map((item, index)=>{
             return (

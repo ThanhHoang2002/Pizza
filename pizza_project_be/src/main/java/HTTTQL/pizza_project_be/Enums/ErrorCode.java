@@ -1,4 +1,4 @@
-package HTTTQL.pizza_project_be.Exception;
+package HTTTQL.pizza_project_be.Enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +15,9 @@ public enum ErrorCode {
     INVALID_STATE(1003, "Invalid state", HttpStatus.BAD_REQUEST),
     UNAUTHORIZED(1004, "Unauthorized", HttpStatus.UNAUTHORIZED),
     FORBIDDEN(1005, "Forbidden", HttpStatus.FORBIDDEN),
+    UNAUTHENTICATED(1006, "Unauthenticated", HttpStatus.UNAUTHORIZED),
+    USER_NOT_EXISTED(1007, "User not existed", HttpStatus.NOT_FOUND),
+    INVALID_KEY(1009, "Invalid key", HttpStatus.BAD_REQUEST),
     ;
     private int code;
     private String message;

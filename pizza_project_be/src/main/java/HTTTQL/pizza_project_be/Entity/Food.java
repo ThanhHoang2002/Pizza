@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class Food {
     @Id
     @Column(name = "food_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String foodId;
 
     @Column(name = "name", nullable = false)

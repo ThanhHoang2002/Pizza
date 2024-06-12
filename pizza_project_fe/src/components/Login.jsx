@@ -2,20 +2,48 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { update } from '../redux/slices/loginSlice';
+import { update as log } from '../redux/slices/alertSlice';
+import axios from 'axios';
+import useLocalStorage from '../customHook';
 
 const Login = () => {
-  const [hiddenPassword, setHiddenPassword] = useState(true)
+  const [hiddenPassword, setHiddenPassword] = useState(false)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [, setClient] = useLocalStorage('client');
   const handleCloseMember =()=>{
+    setEmail('')
+    setPassword('')
     dispatch(update())
   }
   const handleChoseSignUp  =()=>{
     dispatch(update())
     navigate('/sign-up')
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const authenticateReponse = {
+      email: email,
+      password: password,
+    }
+    try{
+      const response = await axios.post('http://localhost:8080/api/v1/client/authenticate', authenticateReponse)
+      if(response.data.message==="Authenticate successfully"){
+        setEmail('')
+        setPassword('')
+        dispatch(update())
+        dispatch(log({hidden: false,text: 'Đăng nhập thành công'}))
+        setClient(response.data.result)
+      }else{
+        dispatch(log({hidden: false,text: 'Sai tài khoản hoặc mật khẩu'}))
+      }
+    }
+    catch(error){
+      console.error('Lỗi khi đăng nhập:', error);
+    }
   }
   return (
     <div className='relative'>
@@ -24,7 +52,7 @@ const Login = () => {
         <div className='w-[50%] text-center bg-white shadow-lg rounded-r-md '>
           <p className='text-[#A80000] font-normal text-[25px] pt-[50px]'>🍕🍕 WELCOME!</p>
           <p className='mt-[2px] text-[rgb(0,0,0,0.87)] text-sm tracking-[0.01071em] font-medium uppercase w-[70%] translate-x-[25%]'>Chào mừng bạn đến với pizzeria! Đăng nhập trước khi thanh toán để tích điểm - Đổi Pizza nhé!</p>
-          <form className='h-auto mx-[57px] text-left'>
+          <form className='h-auto mx-[57px] text-left' onSubmit={handleSubmit}>
             <label className='font-bold text-sm' > Email *</label>         
             <input className='peer w-full h-[40px] border-2 rounded-[4px] border-[rgba(70, 90, 126, 0.4)] px-[14px] py-[10.5px] focus:outline-none focus:border-[#07bc0c]
             invalid:border-[#f44336]  focus:invalid:border-[#f44336] focus:invalid:ring-[#f44336]
