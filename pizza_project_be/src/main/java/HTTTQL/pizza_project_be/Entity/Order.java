@@ -1,10 +1,7 @@
 package HTTTQL.pizza_project_be.Entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -13,11 +10,14 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@AllArgsConstructor
 @Table(name = "orders")
 public class Order {
     @Id
-    @Column(name = "order_id")
-    private String order_id;
+    @Column(name = "order_id",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long order_id;
 
     @Column(name = "note")
     private String note;
@@ -28,10 +28,7 @@ public class Order {
     @Column(name = "day_order", nullable = false)
     private Date dayOrder;
 
-    @Transient
-    private int total;
-
-    @Column(name = "address", nullable = false)
+    @Column(name = "address")
     private String address;
 
     @Column(name = "receive_method", nullable = false)
@@ -40,8 +37,14 @@ public class Order {
     @Column(name = "state", nullable = false)
     private String state;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
     @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @ManyToOne
@@ -52,33 +55,19 @@ public class Order {
     @JoinColumn(name = "store_id")
     private Store store;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<ComboInOrder> comboInOrders;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<PizzaInOrder> pizzaInOrders;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<FoodInOrder> foodInOrders;
 
-
-    public Order(String order_id, String note, String paymentMethod, Date dayOrder, String address, String receiveMethod, String state, Client client, Staff staff, List<ComboInOrder> comboInOrders, List<PizzaInOrder> pizzaInOrders, List<FoodInOrder> foodInOrders, Store store) {
-        this.order_id = order_id;
-        this.note = note;
-        this.paymentMethod = paymentMethod;
-        this.dayOrder = dayOrder;
-        this.address = address;
-        this.receiveMethod = receiveMethod;
-        this.state = state;
-        this.client = client;
-        this.staff = staff;
-        this.comboInOrders = comboInOrders;
-        this.pizzaInOrders = pizzaInOrders;
-        this.foodInOrders = foodInOrders;
-        this.store = store;
+    public long getTotal(){
         int total = 0;
         for (ComboInOrder comboInOrder : comboInOrders) {
             total += comboInOrder.getPriceAtBill();
@@ -89,6 +78,6 @@ public class Order {
         for(FoodInOrder foodInOrder : foodInOrders){
             total += foodInOrder.getPriceAtBill();
         }
-        this.total= total;
+        return total;
     }
 }

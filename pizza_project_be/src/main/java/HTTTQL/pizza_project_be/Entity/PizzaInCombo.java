@@ -15,7 +15,8 @@ import java.util.List;
 public class PizzaInCombo {
     @Id
     @Column(name = "pizza_in_combo_id")
-    private String pizzaInComboId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long pizzaInComboId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;

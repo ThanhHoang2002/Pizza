@@ -29,7 +29,7 @@ const Slide = () => {
       linkto :"/sign-up" 
     },
     {
-      img: "https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbanner%2Fbanner3.jpg?alt=media&token=ed4942c8-5176-438c-82d4-da86e5f719ee",
+      img: "/pizza_project_image/banner/banner3.jpg",
       alt: "Slide2",
       linkto :"/order" 
     }

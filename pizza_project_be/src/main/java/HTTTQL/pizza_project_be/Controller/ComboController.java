@@ -14,46 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/combo")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("api/v1/combo")
 @AllArgsConstructor
 public class ComboController {
     private final ComboService comboService;
-    @GetMapping
+    @GetMapping("/category")
     ApiResponse<List<ComboResponse>> getComboByCategory(@RequestParam("category") String category){
-        List<Combo> combos = comboService.getComboByCategory(category);
-        List<ComboResponse> comboResponses= new ArrayList<>();
-        combos.forEach(combo -> {
-            ComboResponse comboResponse = new ComboResponse();
-            comboResponse.setComboId(combo.getComboId());
-            comboResponse.setName(combo.getName());
-            comboResponse.setPrice(combo.getPrice());
-            comboResponse.setDayStart(combo.getDayStart());
-            comboResponse.setDayEnd(combo.getDayEnd());
-            comboResponse.setImage(combo.getImage());
-            comboResponse.setCategory(combo.getCategory());
-            comboResponse.setDes(combo.getDes());
-            comboResponse.setFoodInCombos(combo.getFoodInCombos());
-            List<PizzaInCombo> pizzaInCombos = combo.getPizzaInCombos();
-            List<PizzaInComboInResponse> pizzaInComboInResponses = new ArrayList<>();
-            pizzaInCombos.forEach(pizzaInCombo -> {
-                PizzaInComboInResponse pizzaInComboInResponse = new PizzaInComboInResponse();
-                pizzaInComboInResponse.setPizzaInComboId(pizzaInCombo.getPizzaInComboId());
-                pizzaInComboInResponse.setQuantity(pizzaInCombo.getQuantity());
-                PizzaResponse pizzaResponse = new PizzaResponse();
-                pizzaResponse.setPizzaId(pizzaInCombo.getPizza().getPizzaId());
-                pizzaResponse.setSize(pizzaInCombo.getPizza().getSize());
-                pizzaResponse.setPrice(pizzaInCombo.getPizza().getPrice());
-                pizzaResponse.setPizzaType(pizzaInCombo.getPizza().getPizzaType());
-                pizzaInComboInResponse.setPizza(pizzaResponse);
-                pizzaInComboInResponses.add(pizzaInComboInResponse);
-            });
-            comboResponse.setPizzaInCombos(pizzaInComboInResponses);
-            comboResponses.add(comboResponse);
-        });
+        List<ComboResponse> combos = comboService.getComboByCategory(category);
+
         return ApiResponse.<List<ComboResponse>>builder()
                 .message("Get combo by category successfully")
-                .result(comboResponses)
+                .result(combos)
                 .build();
     }
 

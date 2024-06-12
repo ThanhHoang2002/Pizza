@@ -23,6 +23,9 @@ public class Pizza {
     @Column(name = "price", nullable = false)
     private int price;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @ManyToOne()
     @JoinColumn(name = "pizza_type_id")
     @JsonBackReference

@@ -1,86 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Product from '../Product/Food'
+import  API_ROUTES  from '../../ApiUrl'
 const MenuFood = () => {
-    const foods = [
-        {   foodID: '1',
-            name: 'Bánh bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '2',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '3',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '4',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '5',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '6',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '7',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '8',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '9',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '10',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        },
-        {
-            foodID: '11',
-            name: 'Bánh mỳ bơ tỏi',
-            price: 20000,
-            image: 'https://cdn.pizzahut.vn/images/Web_V3/Products_MenuTool/Banh_Mi_Bo_Toi_400x275.jpg',
-            des:'Bánh Mì Bơ Tỏi Nướng Giòn Ngon Phủ Xốt Bơ Tỏi Thơm Nồng'
-        }
-    ]
+    const [foods, setFoods] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch(API_ROUTES.getStarter);
+            const data = await response.json();
+            setFoods(data.result); 
+            console.log(data.result)
+          } catch (error) {
+            console.error('Lỗi khi fetch dữ liệu từ API:', error);
+          }
+        };
+        fetchData(); // Gọi hàm fetchData khi component được render
+      }, [])
   return (
-    <div className='h-auto min-h-[950px] w-full grid grid-cols-4'>
+    <div className='h-auto  w-full grid grid-cols-4'>
         {
           foods.map((item, index)=>{
             return (

@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+    note: '',
+    paymentMethod: 'Thanh toán khi nhận hàng',
+    time: '',
+    state: 'Chờ xác nhận',
+    client: {},
+    staff: {},
+    comboInOrders: [],
+    pizzaInOrders: [],
+    foodInOrders: [],
+    total: 0,
+  };
 const orderSlice = createSlice({
   name: 'order',
-  initialState: {
-    note: '',
-    paymentMethod:'Thanh toán khi nhận hàng',
-    time:'',
-    state:'Chờ xác nhận',
-    client:{},
-    staff:{},
-    comboInOrders:[],
-    pizzaInOrders:[],
-    foodInOrders:[],
-    total:0,
-  },
+  initialState: initialState,
   reducers: {
     updateOrder: (state, action) => {
         return state = action.payload;
@@ -56,8 +57,9 @@ const orderSlice = createSlice({
                 break;
         }
     },
+    reset: () => initialState,
   },
 });
 
-export const { updateOrder,deleteItemInOrder,changeQuantity } = orderSlice.actions;
+export const { updateOrder,deleteItemInOrder,changeQuantity,reset } = orderSlice.actions;
 export default orderSlice.reducer;

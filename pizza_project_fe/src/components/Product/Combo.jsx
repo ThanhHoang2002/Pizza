@@ -35,11 +35,11 @@ const Combo = (props) => {
       dispatch(show({hidden: false, combo: item}))
     }
   return (
-    <div key={index} className='relative m-[6px] h-auto border rounded-md shadow-md'>
+    <div key={index} className='relative m-[6px] h-[350px] border rounded-md shadow-md'>
               <div className='group'
               onClick={handleShowDetailCombo}>
                 <div className=' overflow-hidden'>
-                  <img className='object-cover h-full w-full ransition-transform duration-500 transform group-hover:scale-[1.2] cursor-pointer rounded-t-md' src={item.image} alt='combo'/>
+                  <img className='h-full w-full object-cover ransition-transform duration-500 transform group-hover:scale-[1.2] cursor-pointer rounded-t-md' src={item.image} alt='combo'/>
                 </div>
                 <div className='flex justify-between px-[10px] h-[26px] pb-1 cursor-pointer group-hover:bg-slate-50'>
                   <p className='uppercase font-bold text-sm'>{item.name}</p>

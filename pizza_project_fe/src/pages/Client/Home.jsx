@@ -1,14 +1,15 @@
-import React from 'react'
-import Header from '../components/Header'
-import Slide from '../components/Slide'
-import MethodReceive from '../components/MethodReceive'
+import React, { useState } from 'react'
+import Header from '../../components/Header'
+import Slide from '../../components/Slide'
+import MethodReceive from '../../components/MethodReceive'
 import { useSelector } from 'react-redux'
-import Login from '../components/Login'
-import Alert from '../components/Alert'
+import Login from '../../components/Login'
+import Alert from '../../components/Alert'
 import { useNavigate } from 'react-router-dom'
 const Home = () => {
   const isHiddenLogin = useSelector((state) => state.login.hidden)
   const isHiddenAlert = useSelector((state) => state.alert.hidden)
+  const [methodReceive, setMethodReceive] = useState(localStorage.getItem('receiveMethod') === 'Delivery' ? true : false)
   const navigate = useNavigate()
   const handleClickMenu = () => {
     navigate('/order')
@@ -24,7 +25,7 @@ const Home = () => {
           <Slide />
           <div className='h-auto w-full flex justify-center' >
             <div className='relative translate-y-[-50px] z-10'>
-              <MethodReceive />
+              <MethodReceive methodReceive={methodReceive} setMethodReceive={setMethodReceive} />
             </div>
           </div>
           <div className='grid grid-cols-2'>
@@ -33,10 +34,10 @@ const Home = () => {
               <p className='h-[3px] bg-[#e9ebee] w-full absolute'></p>
             </div>
             <div className='h-auto p-[10px] flex items-center justify-end'onClick={handleClickMenu}>
-              <img className='w-[70%] h-[190px] cursor-pointer ' src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbanner%2Fbanner%202.jpg?alt=media&token=5b533285-c820-444e-b7b0-1b8abdc32c94' alt=':img' />
+              <img className='w-[70%] h-[190px] cursor-pointer ' src='/pizza_project_image/banner/banner 2.jpg' alt=':img' />
             </div>
             <div className='h-auto p-[10px] flex items-center justify-start'onClick={handleClickMenu}>
-              <img className='w-[70%] h-[190px] cursor-pointer' src='https://firebasestorage.googleapis.com/v0/b/pizza-fe093.appspot.com/o/image%2Fbanner%2Fbanner%204.jpg?alt=media&token=0d70d97f-5eee-4ff1-8e60-cd9b68b11d56' alt=':img' />
+              <img className='w-[70%] h-[190px] cursor-pointer' src='/pizza_project_image/banner/banner4.jpg' alt=':img' />
             </div>
             <div className='col-span-2 h-auto flex justify-center items-center'>
               <button className='w-[69.5%] bg-[#0A8020] text-white rounded-[4px] py-[12px] text-sm'

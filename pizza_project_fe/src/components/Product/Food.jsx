@@ -12,7 +12,7 @@ const Product = (props) => {
         if(localStorage.getItem('store') === null){
             dispatch(changeState({hidden: false}))
         }else{
-            const existingFoodIndex= order.foodInOrders.findIndex(foodInOrder =>  foodInOrder.food.id === item.id)
+            const existingFoodIndex= order.foodInOrders.findIndex(foodInOrder =>  foodInOrder.food.foodId === item.foodId)
             const updatedFoodInOrder = [...order.foodInOrders];
             if(existingFoodIndex !== -1){
                 updatedFoodInOrder[existingFoodIndex] = {
