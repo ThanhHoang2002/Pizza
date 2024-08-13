@@ -45,7 +45,6 @@ const Slide = () => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />
   };
-  document.cookie = "name: Hoang" ; 
   return (
       <Slider {...settings}>  
       {

@@ -46,7 +46,6 @@ const OrderTable = (props) => {
     }catch(error){
       console.log(error)
       toast.error('Lưu thất bại')
-      window.location.reload()
     }
   };
   return (

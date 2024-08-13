@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.nio.file.AccessDeniedException;
 
@@ -49,7 +50,17 @@ public class GlobalExceptionHandler {
                         .build()
         );
     }
-
+//    @ExceptionHandler(value = HttpClientErrorException.NotFound.class)
+//    ResponseEntity<ApiResponse> handlingNotFoundException(Not exception){
+//        ErrorCode errorCode = ErrorCode.ENTITY_NOT_FOUND;
+//
+//        return ResponseEntity.status(errorCode.getHttpStatusCode()).body(
+//                ApiResponse.builder()
+//                        .code(errorCode.getCode())
+//                        .message(errorCode.getMessage())
+//                        .build()
+//        );
+//    }
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     ResponseEntity<ApiResponse> handlingValidation(MethodArgumentNotValidException exception){
         String enumKey = exception.getFieldError().getDefaultMessage();

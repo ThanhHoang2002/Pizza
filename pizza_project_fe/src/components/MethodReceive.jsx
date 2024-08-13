@@ -19,7 +19,7 @@ const MethodReceive = (props) => {
     const {showClose,methodReceive,setMethodReceive} = props
     
     //////////////////////////////////////////////////////////
-    const [store, setStore] = useState([]);
+    const [store, setStore] = useState([])
 
     useEffect(() => {
       const fetchData = async () => {

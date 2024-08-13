@@ -4,12 +4,6 @@ const TABLE_HEAD = ["Danh Sách Báo Cáo", ""];
  
 const TABLE_ROWS = [
   {
-    name: "Báo cáo kết quả hoạt động kinh doanh giữa niên độ quý 1 năm 2024",
-    report:"A",
-    quater: 1,
-    year: 2024,
-  },
-  {
     name: "Báo cáo kết quả hoạt động kinh doanh năm 2023",
     report:"B",
     year: 2023,
