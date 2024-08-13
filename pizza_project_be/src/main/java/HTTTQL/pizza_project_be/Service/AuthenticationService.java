@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 @Service
@@ -61,28 +62,35 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
-        var user = userRepository.findByUsername(request.getEmail())
-                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        Optional<User> user = userRepository.findByUsername(request.getEmail());
 
+
+        if (user.isEmpty()) {
+            return AuthenticationResponse.builder()
+                    .authenticated(false)
+                    .build();
+        }
         boolean authenticated = passwordEncoder.matches(request.getPassword(),
-                user.getPassword());
+                user.get().getPassword());
 
-        if (!authenticated)
-            throw new AppException(ErrorCode.UNAUTHENTICATED);
+        if (!authenticated )
+            return AuthenticationResponse.builder()
+                    .authenticated(false)
+                    .build();
 
-        var token = generateToken(user);
-        user.setPassword(null);
-        if( user instanceof Staff){
+        var token = generateToken(user.get());
+        user.get().setPassword(null);
+        if( user.get() instanceof Staff){
             return AuthenticationResponse.builder()
                     .token(token)
                     .authenticated(true)
-                    .user((Staff) user)
+                    .user((Staff) user.get())
                     .build();
         }else{
             return AuthenticationResponse.builder()
                     .token(token)
                     .authenticated(true)
-                    .user(user)
+                    .user(user.get())
                     .build();
         }
     }

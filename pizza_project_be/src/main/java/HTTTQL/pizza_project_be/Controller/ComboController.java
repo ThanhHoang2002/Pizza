@@ -21,7 +21,6 @@ public class ComboController {
     @GetMapping("/category")
     ApiResponse<List<ComboResponse>> getComboByCategory(@RequestParam("category") String category){
         List<ComboResponse> combos = comboService.getComboByCategory(category);
-
         return ApiResponse.<List<ComboResponse>>builder()
                 .message("Get combo by category successfully")
                 .result(combos)

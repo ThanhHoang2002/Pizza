@@ -22,8 +22,8 @@ public class Client {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+    @Column(name = "birthday")
+    private Date birthday;
 
     @Column(name = "gender")
     private String gender;
@@ -37,4 +37,9 @@ public class Client {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "avatar")
+    private String avatar;
+
+    @Column(name = "point")
+    private long point;
 }

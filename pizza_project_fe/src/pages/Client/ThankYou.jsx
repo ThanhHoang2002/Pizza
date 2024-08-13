@@ -44,6 +44,7 @@ const ThankYou = (props) => {
     
         fetchData();
       }, []);
+      console.log(order);
   return (
     <div>
         <div className="h-[64px] bg-white">
@@ -54,7 +55,7 @@ const ThankYou = (props) => {
         </div>
         <div className='w-full h-auto flex justify-center bg-[url("https://pizzahut.vn/static/media/background.8c532c6143e1b30fc4a3.jpg")]'>
             <div className='w-[600px]' >
-                <div className='w-full h-[70px] py-[10px] px-[20px] bg-white rounded-t-[4px]'>
+                <div className='w-full min-h-[70px] py-[10px] px-[20px] bg-white rounded-t-[4px]'>
                     <p className='py-[10px] px-[20px] text-center font-bold text-xl text-[rgba(0,0,0,0.54)]'>Cảm ơn vì đã lựa chọn chúng tôi {order?.name}!</p>
                 </div>
                 <div className='p-[10px] w-full h-[84px] bg-[url("https://cdn.pizzahut.vn/images/Web_V3/Homepage/Thanksyoupage.jpg")] text-center'>
